@@ -1,0 +1,4 @@
+plugins:
+  enable_custom_sso_user:
+    default: true
+    client: true
