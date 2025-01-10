@@ -1,4 +1,4 @@
 plugins:
-  enable_custom_sso_user:
+  enable_custom_sso:
     default: true
     client: true

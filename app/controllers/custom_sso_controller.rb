@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class CustomSsoUser::CustomSsoController < ::ApplicationController
+class CustomSso::CustomSsoController < ::ApplicationController
   skip_before_action :verify_authenticity_token, only: :create
 
-  requires_plugin CustomSsoUser::PLUGIN_NAME
+  requires_plugin CustomSso::PLUGIN_NAME
 
   def create
     sso_record = SingleSignOnRecord.find_by(external_id: params[:external_id])
@@ -14,7 +14,7 @@ class CustomSsoUser::CustomSsoController < ::ApplicationController
 
     user = create_user(params)
 
-    if user && create_single_sign_on(user)
+    if user && create_single_sign_on(params, user)
       render json: { success: true }
     else
       render json: { success: false, error: "Failed to create user or SSO record" }, status: :unprocessable_entity
