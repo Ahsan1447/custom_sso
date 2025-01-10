@@ -6,6 +6,12 @@ class CustomSsoUser::CustomSsoController < ::ApplicationController
   requires_plugin CustomSsoUser::PLUGIN_NAME
 
   def create
+    sso_record = SingleSignOnRecord.find_by(external_id: params[:external_id])
+
+    if sso_record
+      return render json: { success: true, message: "SSO record already exists" }
+    end
+
     user = create_user(params)
 
     if user && create_single_sign_on(user)
