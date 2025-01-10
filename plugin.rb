@@ -9,7 +9,7 @@ enabled_site_setting :enable_custom_sso
 
 after_initialize do
   module ::CustomSso
-    PLUGIN_NAME = "custom_sso_user".freeze
+    PLUGIN_NAME = "custom_sso".freeze
 
     class Engine < ::Rails::Engine
       engine_name PLUGIN_NAME
